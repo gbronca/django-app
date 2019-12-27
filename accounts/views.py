@@ -13,9 +13,9 @@ def signup(request):
             return redirect('login')
     else:
         form = UserRegistrationForm()
-    return render(request, 'accounts/signup.html', {'form': form})
+    return render(request, 'accounts/signup.html', {'form': form, 'title': 'Sign up'})
 
 
 @login_required
 def user_profile(request):
-    return render(request, 'accounts/profile.html')
+    return render(request, 'accounts/profile.html', {'title': 'My Profile'})
