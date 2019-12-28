@@ -11,6 +11,12 @@
                 <h2><a class="">{{ object.title }}</a></h2>
                 <p class="">{{ object.description }}</p>
             </div>
+            {% if object.username == user %}
+                <div class="border-top border-light py-3">
+                    <a class="btn btn-outline-secondary" href="{% url 'tickets:update' object.id %}">Update</a>
+                    <a class="btn btn-danger" href="{% url 'tickets:delete' object.id %}">Delete</a>
+                </div>
+            {% endif %}
         </article>
     </div>
 {% endblock %}
