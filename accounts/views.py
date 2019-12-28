@@ -9,7 +9,7 @@ def signup(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Your account has been created, please login')
+            messages.success(request, 'Your account has been created, please login')
             return redirect('login')
     else:
         form = UserRegistrationForm()

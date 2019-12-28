@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="col-12 col-md-10 col-lg-8">
-    {% for bug in object_list %}
+<div class="col-12 col-md-10 col-lg-8 mx-auto mt-5">
+    {% for bug in bugs %}
         <div class="col-12">
             <div class="border border-info rounded-sm">
                 <h2>{{ bug.title }}</h2>
