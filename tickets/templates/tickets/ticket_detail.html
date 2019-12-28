@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-3">
+        <article class="border border-secondary rounded-lg pl-2 content-area">
+            <div class="">
+                <div class="pb-1 mb-3 border-bottom border-success">
+                    <a class="mr-2" href="#">{{ object.username }}</a>
+                    <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
+                </div>
+                <h2><a class="">{{ object.title }}</a></h2>
+                <p class="">{{ object.description }}</p>
+            </div>
+        </article>
+    </div>
+{% endblock %}

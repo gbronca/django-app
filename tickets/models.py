@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Ticket(models.Model):
     STATUS = (
@@ -11,7 +12,7 @@ class Ticket(models.Model):
 
     ISSUE = (
         ('Bug', 'Bug'),
-        ('Feaure', 'Feature')
+        ('Feature', 'Feature')
     )
 
     title = models.CharField(max_length=75)
@@ -25,6 +26,11 @@ class Ticket(models.Model):
 
     def __str__(self):
         return self.title
+
+    
+    def get_absolute_url(self):
+        return reverse('tickets:detail', kwargs={'pk': self.pk})
+
 
 
 class Comments(models.Model):

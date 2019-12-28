@@ -25,16 +25,16 @@
     </header>
 
     <main class="container">
-        {% if messages %}
-            {% for message in messages %}
-                <div {% if message.tags %} class="alert alert-{{ message.tags }} mt-3"{% endif %}>
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        {% block content %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div {% if message.tags %} class="alert alert-{{ message.tags }} mt-3"{% endif %}>
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+            {% block content %}
 
-        {% endblock %}
+            {% endblock %}
     </main>
 
     <footer>
