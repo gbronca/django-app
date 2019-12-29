@@ -19,3 +19,7 @@ def signup(request):
 @login_required
 def user_profile(request):
     return render(request, 'accounts/profile.html', {'title': 'My Profile'})
+
+
+def index(request):
+    return render(request, 'accounts/index.html')

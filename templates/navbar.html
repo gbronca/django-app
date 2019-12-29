@@ -15,15 +15,20 @@
                 <a class="nav-link" href="{% url 'tickets:features' %}">Features</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Cart</a>
+                <a class="nav-link" href="{% url 'about' %}">About Us</a>
             </li>
         </ul>
         <ul class="navbar-nav ml-md-auto">
             {% if request.user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tickets:new_ticket' %}">Report new bug</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'tickets:new_ticket' %}">Request Feature</a>
+            </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                    aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i>
-                    {{ user.username }}</a>
+                    aria-haspopup="true" aria-expanded="false">{{ user.username }}</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{% url 'accounts:profile' %}">My Profile</a>
                     <div class="dropdown-divider"></div>
@@ -41,7 +46,7 @@
             </li>
             {% endif %}
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'about' %}">About Us</a>
+                <a class="nav-link" href="#">Cart</a>
             </li>
         </ul>
     </div>
