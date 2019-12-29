@@ -24,4 +24,5 @@ urlpatterns = [
     path('about/',TemplateView.as_view(template_name='about.html'), name='about'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('tickets/', include('tickets.urls', namespace='tickets')),
+    path('cart/', include('cart.urls', namespace='cart')),
 ]
