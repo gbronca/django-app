@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -12,9 +13,21 @@ class BugListView(ListView):
     model = Ticket
     # template_name = 'tickets/bugs.html'
     context_object_name = 'bugs'
+    paginate_by = 2
 
     def get_queryset(self, *args, **kwargs):
         return Ticket.objects.filter(issue='Bug').order_by('-date_posted')
+
+
+class UserBugListView(ListView):
+    model = Ticket
+    # template_name = 'tickets/bugs.html'
+    context_object_name = 'bugs'
+    paginate_by = 2
+
+    def get_queryset(self, *args, **kwargs):
+        username = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Ticket.objects.filter(issue='Bug', username=username).order_by('-date_posted')
 
 
 class FeaturesListView(ListView):
@@ -24,6 +37,8 @@ class FeaturesListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Ticket.objects.filter(issue='Feature').order_by('-date_posted')
+
+
 
 
 class TicketDetailView(DetailView):
