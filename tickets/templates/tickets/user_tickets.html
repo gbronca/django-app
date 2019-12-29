@@ -2,15 +2,20 @@
 
 {% block content %}
     <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-3">
-        {% for bug in bugs %}
+        <h1 class="mb-5">{{ type }} by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+        {% for obj in object_list %}
             <article class="border border-secondary rounded-lg pl-2 content-area">
                 <div class="">
                     <div class="pb-1 mb-3 border-bottom border-success">
-                        <a class="mr-2" href="{% url 'tickets:user' bug.username.username %}">{{ bug.username }}</a>
-                        <small class="text-muted">{{ bug.date_posted|date:"d F, Y" }}</small>
+                        {% if type == 'Bugs' %}
+                            <a class="mr-2" href="{% url 'tickets:user_bugs' obj.username.username %}">{{ obj.username }}</a>
+                        {% elif type == 'Features' %}
+                            <a class="mr-2" href="{% url 'tickets:user_features' obj.username.username %}">{{ obj.username }}</a>
+                        {% endif %}
+                        <small class="text-muted">{{ obj.date_posted|date:"d F, Y" }}</small>
                     </div>
-                    <h2><a class="" href="{% url 'tickets:detail' bug.id %}">{{ bug.title }}</a></h2>
-                    <p class="">{{ bug.description|linebreaks|truncatechars_html:200 }}</p>
+                    <h2><a class="" href="{% url 'tickets:detail' obj.id %}">{{ obj.title }}</a></h2>
+                    <p class="">{{ obj.description|linebreaks|truncatechars_html:200 }}</p>
                 </div>
             </article>
         {% endfor %}
