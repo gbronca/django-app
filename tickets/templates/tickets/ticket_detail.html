@@ -17,9 +17,15 @@
                     <a class="btn btn-danger" href="{% url 'tickets:delete' object.id %}">Delete</a>
                 </div>
             {% else %}
-                <div class="border-top border-light py-3">
-                    <a class="btn btn-outline-success" href="{% url 'tickets:vote' object.id %}">Vote</a>
-                </div>
+                {% if object.issue == 'Bug' %}
+                    <div class="border-top border-light py-3">
+                        <a class="btn btn-outline-success" href="{% url 'tickets:vote' pk=object.id %}">Vote</a>
+                    </div>
+                {% else %}
+                    <div class="border-top border-light py-3">
+                        <a class="btn btn-outline-success" href="">Add to Cart</a>
+                    </div>
+                {% endif %}
             {% endif %}
 
             {% if user.is_authenticated %}

@@ -14,5 +14,5 @@ urlpatterns = [
     path('detail/<int:pk>/comment', views.add_comment_to_ticket, name='add_comment_to_ticket'),
     path('user-bugs/<username>/', views.UserBugListView.as_view(template_name='tickets/user_tickets.html'), name='user_bugs'),
     path('user-features/<username>/', views.UserFeatureListView.as_view(template_name='tickets/user_tickets.html'), name='user_features'),
-    # path('vote/<int:pk>/', views.upvote_ticket, name='vote'),
+    path('vote/<int:pk>/', views.ticket_upvote, name='vote'),
 ]

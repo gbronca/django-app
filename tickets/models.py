@@ -51,6 +51,5 @@ class Upvoted(models.Model):
     ticket = models.ForeignKey(Ticket, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return f'{self.user}: {self.ticket}'

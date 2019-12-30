@@ -3,6 +3,9 @@ from django.contrib.auth import get_user
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import F
+from django.contrib import messages
 from django.views.generic import (
     ListView,
     DetailView,
@@ -68,7 +71,6 @@ class UserFeatureListView(ListView):
         return Ticket.objects.filter(issue='Feature', username=username).order_by('-date_posted')
 
     def get_context_data(self, **kwargs):
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
         context['type'] = 'Features'
         is_paginated = True
@@ -81,7 +83,7 @@ class TicketDetailView(DetailView):
 
 class TicketCreateView(LoginRequiredMixin ,CreateView):
     model = Ticket
-    fields = ['title', 'description']
+    fields = ['title', 'issue','description',]
 
     def form_valid(self, form):
         form.instance.username = self.request.user
@@ -131,3 +133,31 @@ def add_comment_to_ticket(request, pk):
     else:
         form = CommentForm()
     return render(request, 'tickets/comment_form.html', {'form': form})
+
+
+@login_required
+def ticket_upvote(request, pk=None):
+    
+    ticket = get_object_or_404(Ticket, pk=pk)
+    try:
+        user = User.objects.get(username=request.user)
+    except BaseException:
+        user = None
+
+    if user:
+        try:
+            upvoted = Upvoted.objects.get(ticket=ticket, user=request.user)
+            print(upvoted)
+        except ObjectDoesNotExist:
+            ticket_voted = Ticket.objects.get(pk=pk)
+            ticket_voted.upvotes = F('upvotes') + 1
+            upvote = Upvoted()
+            upvote.user = request.user
+            upvote.ticket = ticket
+            ticket_voted.save()
+            upvote.save()
+            messages.success(request, 'Your vote has been recorded. Thanks for voting on this ticket.')
+        else:
+            messages.warning(request, 'You have already voted on this item.')
+
+    return redirect('tickets:detail', ticket.pk) 

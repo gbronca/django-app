@@ -10,7 +10,7 @@ def signup(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Your account has been created, please login')
-            return redirect('login')
+            return redirect('accounts:login')
     else:
         form = UserRegistrationForm()
     return render(request, 'accounts/signup.html', {'form': form, 'title': 'Sign up'})
