@@ -83,11 +83,10 @@ class TicketDetailView(DetailView):
 
 class TicketCreateView(LoginRequiredMixin ,CreateView):
     model = Ticket
-    fields = ['title', 'issue','description',]
+    fields = ['title', 'issue', 'description',]
 
     def form_valid(self, form):
         form.instance.username = self.request.user
-
         return super().form_valid(form)
 
 
@@ -132,7 +131,7 @@ def add_comment_to_ticket(request, pk):
             return redirect('tickets:detail', pk=ticket.pk)
     else:
         form = CommentForm()
-    return render(request, 'tickets/comment_form.html', {'form': form})
+    return render(request, 'tickets/comment_form.html', {'form': form, 'title': ticket.title})
 
 
 @login_required
