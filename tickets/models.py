@@ -34,7 +34,7 @@ class Ticket(models.Model):
 
 
 class Comments(models.Model):
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True)
+    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE, null=True, related_name='comments')
     username = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False)
     comment = models.TextField(null=False, blank=False)
     date_created = models.DateTimeField(default=timezone.now)
@@ -43,10 +43,14 @@ class Comments(models.Model):
     def __str__(self):
         return f'{self.ticket}: {self.username}'
 
+    def get_absolute_url(self):
+        return reverse("ticket:detail")
 
-class Upvote(models.Model):
+
+class Upvoted(models.Model):
     ticket = models.ForeignKey(Ticket, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f'{self.user}: {self.ticket}'

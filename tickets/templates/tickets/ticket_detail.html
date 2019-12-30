@@ -9,14 +9,45 @@
                     <small class="text-muted">{{ object.date_posted|date:"d F, Y" }}</small>
                 </div>
                 <h2><a class="">{{ object.title }}</a></h2>
-                <p class="">{{ object.description }}</p>
+                <p class="">{{ object.description|safe|linebreaks }}</p>
             </div>
             {% if object.username == user %}
                 <div class="border-top border-light py-3">
                     <a class="btn btn-outline-secondary" href="{% url 'tickets:update' object.id %}">Update</a>
                     <a class="btn btn-danger" href="{% url 'tickets:delete' object.id %}">Delete</a>
                 </div>
+            {% else %}
+                <div class="border-top border-light py-3">
+                    <a class="btn btn-outline-success" href="{% url 'tickets:vote' object.id %}">Vote</a>
+                </div>
             {% endif %}
+
+            {% if user.is_authenticated %}
+            <hr>
+                <a class="btn btn-primary btn-comment" href="{% url 'tickets:add_comment_to_ticket' pk=object.id %}">Add comment</a>
+            {% endif %}
+  
+  
+  
+ 
+  
+            
         </article>
     </div>
+
+    <div class="container">
+        {% for comment in object.comments.all %}
+  <br>
+
+              {{ comment.date_created }}
+
+
+          <p>{{ comment.comment|safe|linebreaks }}</p>
+          <p>Posted by: <strong>{{ comment.user }}</strong></p>
+
+  {% empty %}
+      <p>No comments posted.</p>
+  {% endfor %}
+    </div>
+
 {% endblock %}

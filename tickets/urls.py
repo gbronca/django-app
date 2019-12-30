@@ -11,6 +11,8 @@ urlpatterns = [
     path('new/', views.TicketCreateView.as_view(), name='new_ticket'),
     path('detail/<int:pk>/update', views.TicketUpdateView.as_view(), name='update'),
     path('detail/<int:pk>/delete', views.TicketDeleteView.as_view(), name='delete'),
+    path('detail/<int:pk>/comment', views.add_comment_to_ticket, name='add_comment_to_ticket'),
     path('user-bugs/<username>/', views.UserBugListView.as_view(template_name='tickets/user_tickets.html'), name='user_bugs'),
     path('user-features/<username>/', views.UserFeatureListView.as_view(template_name='tickets/user_tickets.html'), name='user_features'),
+    # path('vote/<int:pk>/', views.upvote_ticket, name='vote'),
 ]

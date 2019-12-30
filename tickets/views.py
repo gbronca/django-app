@@ -1,13 +1,17 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth import get_user
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView)
-from .models import Ticket
+    DeleteView,
+    FormView)
+from .models import Ticket, Upvoted, Comments
+from .forms import CommentForm
 
 class BugListView(ListView):
     paginate_by = 5
@@ -19,7 +23,6 @@ class BugListView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['type'] = 'Bugs'
         is_paginated = True
         return context
@@ -36,7 +39,6 @@ class UserBugListView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['type'] = 'Bugs'
         is_paginated = True
         return context
@@ -52,7 +54,6 @@ class FeaturesListView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['type'] = 'Features'
         is_paginated = True
         return context
@@ -69,7 +70,6 @@ class UserFeatureListView(ListView):
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
-        # Add in a QuerySet of all the books
         context['type'] = 'Features'
         is_paginated = True
         return context
@@ -115,3 +115,19 @@ class TicketDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+
+@login_required
+def add_comment_to_ticket(request, pk):
+    ticket = get_object_or_404(Ticket, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.ticket = ticket
+            print(request.user)
+            comment.username = request.user
+            comment.save()
+            return redirect('tickets:detail', pk=ticket.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'tickets/comment_form.html', {'form': form})
