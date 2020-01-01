@@ -2,5 +2,136 @@
 
 {% block content %}
 
-<h1>home page </h1>
+<p class="my-3">
+The AppTracker <i class="far fa-check-circle"></i> is a web app designed to easily report bugs and request features
+</p>
+<!-- Stats tables -->
+    <div class="row">
+        <!-- Bugs  -->
+        <article class="col-12 col-md-6 mx-auto mt-3">
+            <div class="border border-secondary rounded-lg pl-2 content-area">
+                <div class="row justify-content-center">
+                    <h2>Bugs</h2>
+                </div>
+                <div class="px-3 mx-auto">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pending</td>
+                                <td>{{ total_bugs_pending }}</td>
+                            </tr>
+                            <tr>
+                                <td>In Progress</td>
+                                <td>{{ total_bugs_in_progress }}</td>
+                            </tr>
+                            <tr>
+                                <td>Completed</td>
+                                <td>{{ total_bugs_completed }}</td>
+                            </tr>
+                            <tr class="table-active">
+                                <td>Total</td>
+                                <td>{{ total_bugs }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center px-3 mx-2 mt-5 mb-3">
+                    <h3>Top priority bugs</h3>
+                </div>
+                <div class="px-3 mx-auto">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Bug</th>
+                                <th scope="col">Total Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for bug in top_voted_bugs.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td class="text-wrap">{{ bug.title|truncatechars_html:40 }}</td>
+                                <td>{{ bug.upvotes }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center my-2 pt-3 pb-2">
+                    <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:bugs' %}">View Bugs</a>
+                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Bug</a>
+                </div>
+            </div>
+        </article>
+    <!-- Features -->
+        <article class="col-12 col-md-6 mx-auto mt-3">
+            <div class="border border-secondary rounded-lg pl-2 content-area">
+                <div class="row justify-content-center">
+                    <h2>Features</h2>
+                </div>
+                <div class="px-3 mx-auto">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Status</th>
+                                <th scope="col">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pending</td>
+                                <td>{{ total_features_pending }}</td>
+                            </tr>
+                            <tr>
+                                <td>In Progress</td>
+                                <td>{{ total_features_in_progress }}</td>
+                            </tr>
+                            <tr>
+                                <td>Completed</td>
+                                <td>{{ total_features_completed }}</td>
+                            </tr>
+                            <tr class="table-active">
+                                <td>Total</td>
+                                <td>{{ total_features }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center px-3 mx-2 mt-5 mb-3">
+                    <h3>Most popular features</h3>
+                </div>
+                <div class="px-3 mx-auto">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Total Votes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for feature in top_voted_features.all %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td class="text-wrap">{{ feature.title|truncatechars_html:40 }}</td>
+                                <td>{{ feature.upvotes }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row justify-content-center my-2 pt-3 pb-2">
+                    <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:features' %}">View Features</a>
+                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Feature</a>
+                </div>
+            </div>
+        </article>
+    </div>
 {% endblock %}

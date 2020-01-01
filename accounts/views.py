@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import UserRegistrationForm
+from tickets.models import Ticket
 
 
 def signup(request):
@@ -22,4 +23,31 @@ def user_profile(request):
 
 
 def index(request):
-    return render(request, 'accounts/index.html')
+    # Bugs
+    total_bugs = Ticket.objects.filter(issue='Bug').count()
+    total_bugs_in_progress = Ticket.objects.filter(issue='Bug', status='In Progress').count()
+    total_bugs_pending = Ticket.objects.filter(issue='Bug', status='Pending').count()
+    total_bugs_completed = Ticket.objects.filter(issue='Bug', status='Completed').count()
+    top_voted_bugs = Ticket.objects.filter(issue='Bug').order_by('-upvotes')[:3]
+    
+    # Features
+    total_features = Ticket.objects.filter(issue='Feature').count()
+    total_features_in_progress = Ticket.objects.filter(issue='Feature', status='In Progress').count()
+    total_features_pending = Ticket.objects.filter(issue='Feature', status='Pending').count()
+    total_features_completed = Ticket.objects.filter(issue='Feature', status='Completed').count()
+    top_voted_features = Ticket.objects.filter(issue='Feature').order_by('-upvotes')[:3]
+
+
+    context = {
+        'total_bugs': total_bugs,
+        'total_bugs_in_progress': total_bugs_in_progress,
+        'total_bugs_pending': total_bugs_pending,
+        'total_bugs_completed': total_bugs_completed,
+        'top_voted_bugs': top_voted_bugs,
+        'total_features': total_features,
+        'total_features_in_progress': total_features_in_progress,
+        'total_features_pending': total_features_pending,
+        'total_features_completed': total_features_completed,
+        'top_voted_features': top_voted_features,
+    }
+    return render(request, 'accounts/index.html', context)

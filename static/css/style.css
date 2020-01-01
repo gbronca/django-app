@@ -7,4 +7,22 @@ body {
 	background: #ffffff;
 	padding: 10px 20px;
 	margin-bottom: 20px;
-  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #444444;
+}
+
+a, a:hover {
+	text-decoration: none;
+}
+
+.border-color-faded {
+	border: 1px solid #dddddd;
+	/* border-bottom: 1px solid #e3e3e3; */
+}
