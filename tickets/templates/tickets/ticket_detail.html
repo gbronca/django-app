@@ -22,7 +22,7 @@
                     {% if object.issue == 'Bug' %}
                         <a class="btn btn-outline-success mx-1" href="{% url 'tickets:vote' pk=object.id %}">Vote</a>
                     {% else %}
-                        <a class="btn btn-outline-success mx-1" href="">Add to Cart</a>
+                        <a class="btn btn-outline-success mx-1" href="{% url 'cart:add' id=object.id %}">Add to Cart</a>
                     {% endif %}
                 {% endif %}
                     {% if user.is_authenticated %}

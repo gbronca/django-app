@@ -1,9 +1,33 @@
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth.decorators import login_required
-# from .models import Cart
-from tickets.models import Ticket
+from django.shortcuts import render, redirect, reverse
 
-@login_required
+def view_cart(request):
+    """A view that returns the cart contents page"""
+    return render(request, 'cart/cart.html')
+    
+
 def add_to_cart(request, id):
-    ticket = get_object_or_404(Ticket, id=id)
+    """Add a quantity of the specified product to the cart"""
 
+    # Default quantity to 1 if request.get fails
+    quantity = 1
+    # quantity=int(request.POST.get('quantity'))
+ 
+    cart = request.session.get('cart', {})
+    cart[id] = cart.get(id, quantity)
+    print(cart)
+    request.session['cart'] = cart
+    return redirect('tickets:detail', id)
+    
+
+def adjust_cart(request, id):
+    """Adjust the quantity of the specified product to the specifies amount"""
+
+    # Default quantity to 1 if request.get fails
+    quantity = 1
+    quantity=int(request.POST.get('quantity'))
+
+    cart = request.session.get('cart', {})
+
+    cart.pop(id)
+    request.session['cart'] = cart
+    return redirect(reverse('view_cart'))

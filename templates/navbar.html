@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark" role="navigation">
+<nav class="navbar navbar-expand-md navbar-dark navbar-concrete bg-haiti" role="navigation">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'index' %}">AppTracker <i class="far fa-check-circle"></i></a>
+        <a class="navbar-brand" href="{% url 'index' %}"><span class="d-md-inline-block d-none">AppTracker</span> <i class="far fa-check-circle text-success"></i></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,7 +45,7 @@
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Cart</a>
+                    <a class="nav-link" href="{% url 'cart:cart' %}">Cart</a>
                 </li>
             </ul>
         </div>

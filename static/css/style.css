@@ -26,3 +26,13 @@ a, a:hover {
 	border: 1px solid #dddddd;
 	/* border-bottom: 1px solid #e3e3e3; */
 }
+
+.bg-haiti {
+	background-color: #1B1035;
+}
+
+.navbar-concrete,
+.nav-link,
+a.navbar-brand {
+	color: #F2F2F2 !important;
+}

@@ -2,5 +2,46 @@
 
 {% block content %}
 
-<h1>cart home page </h1>
+<div class="row justify-content-center">
+    <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart (0 items)</h2>
+</div>
+
+<!-- Stats tables -->
+    <div class="row">
+        <!-- Bugs  -->
+        <article class="col-12 col-lg-10 mx-auto mt-3">
+            <div class="border border-secondary rounded-lg pl-2 content-area">
+                <div class="row justify-content-center">
+                    <h2>Bugs</h2>
+                </div>
+                <div class="px-3 mx-auto">
+                    <table class="table table-hover table-sm">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Item</th>
+                                <th scope="col">Feature</th>
+                                <th scope="col">Votes</th>
+                                <th scope="col">Unit Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in cart_items %}
+                            <tr>
+                                <th scope="row">{{ forloop.counter }}</th>
+                                <td class="text-wrap"><a href="{% url 'tickets:detail' item.ticket.id %}">{{ item.ticket.title|truncatechars_html:40 }}</a></td>
+                                <td>{{ item.quantity }}</td>
+                                <td>£ {{ item.price|floatformat:2 }}</td>
+                                <td><i class="fas fa-minus-square"></i> <i class="fas fa-plus-square"></i> <i class="fas fa-trash-alt"></i></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <div class="row justify-content-center my-2 pt-3 pb-2">
+                    <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:bugs' %}">View Bugs</a>
+                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Bug</a>
+                </div> -->
+            </div>
+        </article>
+    </div>
 {% endblock %}
