@@ -80,6 +80,16 @@ class UserFeatureListView(ListView):
 class TicketDetailView(DetailView):
     model = Ticket
 
+    # queryset = Ticket.objects.all()
+
+    def get_object(self, queryset=None):
+        obj = super().get_object()
+        obj.views += 1
+        obj.save()
+        return obj
+    
+    
+    
 
 class TicketCreateView(LoginRequiredMixin ,CreateView):
     model = Ticket

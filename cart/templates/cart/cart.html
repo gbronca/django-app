@@ -3,39 +3,68 @@
 {% block content %}
 
 <div class="row justify-content-center">
-    <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart (0 items)</h2>
+    {% if ticket_count > 0 %}
+        <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart ({{ ticket_count }} items)</h2>
+    {% else %}
+        <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart (0 items)</h2>
+    {% endif %}
 </div>
 
 <!-- Stats tables -->
     <div class="row">
-        <!-- Bugs  -->
         <article class="col-12 col-lg-10 mx-auto mt-3">
             <div class="border border-secondary rounded-lg pl-2 content-area">
-                <div class="row justify-content-center">
-                    <h2>Bugs</h2>
-                </div>
                 <div class="px-3 mx-auto">
+                    <div class="my-3 pt-3 pb-1">
+                        <h4 class="font-weight-light">Your cart summary</h4>
+                    </div>
                     <table class="table table-hover table-sm">
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col">Item</th>
-                                <th scope="col">Feature</th>
+                                <th scope="col" class="w-50">Feature</th>
                                 <th scope="col">Votes</th>
                                 <th scope="col">Unit Price</th>
+                                <th scope="col"> </th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for item in cart_items %}
                             <tr>
-                                <th scope="row">{{ forloop.counter }}</th>
-                                <td class="text-wrap"><a href="{% url 'tickets:detail' item.ticket.id %}">{{ item.ticket.title|truncatechars_html:40 }}</a></td>
-                                <td>{{ item.quantity }}</td>
-                                <td>£ {{ item.price|floatformat:2 }}</td>
-                                <td><i class="fas fa-minus-square"></i> <i class="fas fa-plus-square"></i> <i class="fas fa-trash-alt"></i></td>
+                                <th class="align-middle" scope="row">{{ forloop.counter }}</th>
+                                <td class="align-middle" class="text-wrap"><a href="{% url 'tickets:detail' item.ticket.id %}">{{ item.ticket.title|truncatechars_html:40 }}</a></td>
+                                <td class="align-middle">{{ item.quantity }}</td>
+                                <td class="align-middle">£ {{ item.price|floatformat:2 }}</td>
+                                <td class="align-middle">
+                                    <form class="form-row" method="POST">
+                                        {% csrf_token %}
+                                        <div class="col-auto text-center">
+                                            <a class="btn btn-sm btn-warning"
+                                                href="{% url 'cart:adjust_cart' item.ticket.id %}"><i
+                                                    class="fas fa-minus-square"></i></a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a class="btn btn-sm btn-success" href="{% url 'cart:add' item.ticket.id %}"><i
+                                                    class="fas fa-plus-square"></i></a>
+                                        </div>
+                                        <div class="col-auto">
+                                            <a class="btn btn-sm btn-danger" href="{% url 'cart:remove' id=item.ticket.id %}"> <i
+                                                    class="fas fa-trash-alt"></i></a>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>
                     </table>
+                    <div class="my-3 pt-3 pb-1 d-flex justify-content-end">
+                        <div class="mr-5">
+                            <h5 class="font-weight-bolder">Cart Total: £ {{ total|floatformat:2 }}</h5>
+                        </div>
+                        <div class="ml-4">
+                            <a href="#" class="btn btn-success" role="button">Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                        </div>
+                    </div> 
                 </div>
                 <!-- <div class="row justify-content-center my-2 pt-3 pb-2">
                     <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:bugs' %}">View Bugs</a>

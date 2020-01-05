@@ -1,10 +1,9 @@
 from django import forms
-from .models import Donate
 import datetime
 
 class PaymentForm(forms.Form):
     now = datetime.datetime.now()
-    current_year = now.Year    
+    current_year = now.year
 
     MONTH_CHOICES = [(i, i) for i in range(1, 13)]
     YEAR_CHOICES = [(i, i) for i in range(current_year, current_year + 10)]

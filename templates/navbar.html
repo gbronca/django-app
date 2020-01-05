@@ -45,7 +45,12 @@
                     </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'cart:cart' %}">Cart</a>
+                    <a class="nav-link" href="{% url 'cart:cart' %}">
+                        <i class="fas fa-shopping-cart fa-sm"></i><span> Cart</span>
+                        {% if tickets_count > 0 %}
+                            <span class="badge badge-success"> {{ tickets_count }}</span>
+                        {% endif %}
+                    </a>
                 </li>
             </ul>
         </div>

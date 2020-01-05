@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'tickets',
     'cart',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -137,11 +138,17 @@ STATICFILES_LOCATION = 'static'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
+# Crispy-forms settings
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+# Email configuration variables - Allow the site to send emails to users.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_USE_TLS = bool(os.environ.get('EMAIL_USE_TLS'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
+
+# Stripe system configuration variables
+STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

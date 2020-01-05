@@ -19,13 +19,13 @@ def cart_contents(request):
         ticket = get_object_or_404(Ticket, pk=id)
 
         upvote_list.append(id)
-        tickets_count += quantity
-        total += quantity * price
+        tickets_count += quantity # Items in cart
+        total += quantity * price # Total to be paid
 
         cart_items.append({'id': id, 'quantity': quantity,
                            'ticket': ticket, 'price': price})
 
-    return {'ticket_count': tickets_count,
+    return {'tickets_count': tickets_count,
             'cart_items': cart_items,
             'total': total,
             'upvote_list': upvote_list}
