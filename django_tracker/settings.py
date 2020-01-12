@@ -29,7 +29,7 @@ print(os.environ.get('EMAIL_USER'))
 SECRET_KEY = 'y1ys^jmz2i!!v**n@$0(*=hzdatr)=@!7qovcl=fd+wj$1oav7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'tickets',
     'cart',
     'checkout',
+    'stripe',
 ]
 
 MIDDLEWARE = [

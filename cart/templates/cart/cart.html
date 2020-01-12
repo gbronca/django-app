@@ -61,9 +61,15 @@
                         <div class="mr-5">
                             <h5 class="font-weight-bolder">Cart Total: £ {{ total|floatformat:2 }}</h5>
                         </div>
-                        <div class="ml-4">
-                            <a href="#" class="btn btn-success" role="button">Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
-                        </div>
+                        {% if total > 0 %}
+                            <div class="ml-4">
+                                <a href="{% url 'checkout:checkout' %}" class="btn btn-success" role="button">Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            </div>
+                        {% else %}
+                            <div class="ml-4">
+                                <button href="{% url 'checkout:checkout' %}" class="btn btn-success" role="button" disabled>Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+                            </div>
+                        {% endif %}
                     </div> 
                 </div>
                 <!-- <div class="row justify-content-center my-2 pt-3 pb-2">
