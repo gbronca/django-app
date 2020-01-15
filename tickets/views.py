@@ -80,15 +80,11 @@ class UserFeatureListView(ListView):
 class TicketDetailView(DetailView):
     model = Ticket
 
-    # queryset = Ticket.objects.all()
-
     def get_object(self, queryset=None):
         obj = super().get_object()
         obj.views += 1
         obj.save()
         return obj
-    
-    
     
 
 class TicketCreateView(LoginRequiredMixin ,CreateView):
@@ -141,7 +137,7 @@ def add_comment_to_ticket(request, pk):
             return redirect('tickets:detail', pk=ticket.pk)
     else:
         form = CommentForm()
-    return render(request, 'tickets/comment_form.html', {'form': form, 'title': ticket.title})
+    return render(request, 'tickets/comment_form.html', {'form': form, 'title': ticket.title, 'issue':ticket.issue})
 
 
 @login_required

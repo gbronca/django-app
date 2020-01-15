@@ -1,22 +1,53 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-3">
-        {{ type }}
+    <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-3 mb-5 pb-5">
+        {% if type == 'Bugs' %}
+            <h3><i class="fas fa-spider"></i> {{ type }}</h3>
+        {% else %}
+            <h3><i class="fas fa-tag"></i> {{ type }}</h3>
+        {% endif %}
 
         {% for ticket in object_list %}
-            <article class="border border-color-faded rounded-lg pl-2 content-area">
-                <div class="">
-                    <div class="pb-1 mb-3 border-bottom border-success">
-                        {% if type == 'Bugs' %}
-                            <a class="mr-2" href="{% url 'tickets:user_bugs' ticket.username.username %}">{{ ticket.username }}</a>
-                        {% elif type == 'Features' %}
-                            <a class="mr-2" href="{% url 'tickets:user_features' ticket.username.username %}">{{ ticket.username }}</a>
-                        {% endif %}
-                        <small class="text-muted">{{ ticket.date_posted|date:"d F, Y" }}</small>
+            <article class="border border-color-faded rounded-sm my-3 box-shadow bg-gray-light">
+                <div class="px-3">
+                    <div class="d-flex justify-content-between my-1">
+                        <div class="d-flex flex-grow-1 flex-shrink-1 ">
+                            <h2><span
+                                    class="badge badge-secondary badge-ticket badge-ticket-{{ ticket.status|lower|cut:' ' }}">{{ ticket.status }}
+                                </span>
+                                <a class="text-decoration-none header-normal"
+                                    href="{% url 'tickets:detail' ticket.id %}">{{ ticket.title }}</a></h2>
+                        </div>
+                        <div class="d-flex align-self-start ml-3 my-1">
+                            <div class="border border-color-faded rounded-sm py-1 px-2 ml-2 badge-ticket"><i class="far fa-thumbs-up"></i>  {{ ticket.upvotes }}</div>
+                            <div class="border border-color-faded rounded-sm py-1 px-2 ml-2 badge-ticket"><i class="fas fa-binoculars"></i>  {{ ticket.views }}</div>
+                            <div class="border border-color-faded rounded-sm py-1 px-2 ml-2 badge-ticket"><i class="far fa-comment-alt"></i>  {{ ticket.comments.count }}</div>
+                        </div>
                     </div>
-                    <h2><a class="" href="{% url 'tickets:detail' ticket.id %}">{{ ticket.title }}</a></h2>
-                    <p class="">{{ ticket.description|linebreaks|truncatechars_html:200 }}</p>
+                </div>
+                <div class="pb-1">
+                    <div class="px-3">
+                        <div class="d-flex justify-content-between py-1 px-1">
+                            <div class="d-flex flex-grow-1 flex-shrink-1">
+                                {% if type == 'Bugs' %}
+                                <a class="mr-2 text-decoration-none"
+                                    href="{% url 'tickets:user_bugs' ticket.username.username %}"><small>by: {{ ticket.username }}</small></a>
+                                {% elif type == 'Features' %}
+                                <a class="mr-2 text-decoration-none"
+                                    href="{% url 'tickets:user_features' ticket.username.username %}"><small>by: {{ ticket.username }}</small></a>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex align-self-start">
+                                <small class="text-muted">{{ ticket.date_posted|date:"d F, Y" }}</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-bottom border-top bg-white">
+                    <div class="p-3">
+                        <div class="">{{ ticket.description|linebreaks|truncatechars_html:200 }}</div>
+                    </div>
                 </div>
             </article>
         {% endfor %}
@@ -25,7 +56,6 @@
                 <a class="btn btn-outline-secondary btn-sm" href="?page=1">First</a>
                 <a class="btn btn-outline-secondary btn-sm" href="?page={{ page_obj.previous_page_number }}">Previous</a>
             {% endif %}
-
             {% for page in page_obj.paginator.page_range %}
                 {% if page_obj.number == page %}
                     <a class="btn btn-secondary btn-sm" href="?page={{ page }}">{{ page }}</a>
