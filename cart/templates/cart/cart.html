@@ -4,9 +4,9 @@
 
 <div class="row justify-content-center">
     {% if ticket_count > 0 %}
-        <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart ({{ ticket_count }} items)</h2>
+        <h2 class="mt-4 mb-2 pt-4 pb-2">Your cart ({{ ticket_count }} items)</h2>
     {% else %}
-        <h2 class="mt-4 mb-2 pt-4 pb-2">Your Cart (0 items)</h2>
+        <h2 class="mt-4 mb-2 pt-4 pb-2">Your cart is empty</h2>
     {% endif %}
 </div>
 
@@ -59,7 +59,7 @@
                     </table>
                     <div class="my-3 pt-3 pb-1 d-flex justify-content-end">
                         <div class="mr-5">
-                            <h5 class="font-weight-bolder">Cart Total: £ {{ total|floatformat:2 }}</h5>
+                            <h5 class="font-weight-bolder mt-2">Cart Total: £ {{ total|floatformat:2 }}</h5>
                         </div>
                         {% if total > 0 %}
                             <div class="ml-4">
