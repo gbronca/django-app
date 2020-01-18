@@ -28,4 +28,5 @@ def cart_contents(request):
     return {'tickets_count': tickets_count,
             'cart_items': cart_items,
             'total': total,
+            'price': price,
             'upvote_list': upvote_list}

@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block chartjs_library %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+{% endblock chartjs_library %}
 
 {% block content %}
-
-<p class="my-3">
-The AppTracker <i class="far fa-check-circle"></i> is a web app designed to easily report bugs and request features
-</p>
-<!-- Stats tables -->
+    <p class="my-3">
+        The AppTracker <i class="far fa-check-circle text-success"></i> is a web based app designed to easily report bugs and request.
+    </p>
+    <p>
+        Our aim is to focus 50% of our time in solving the bugs and the other 50% of the time working of features you have requested.
+    </p>
+        Please support us by voting on your most desired features. Each feature vote costs only £{{ price|floatformat:2 }} and you can vote as many times as you want.
+    </p>
+    <!-- Stats tables -->
     <div class="row">
         <!-- Bugs  -->
         <article class="col-12 col-md-6 mx-auto mt-3">
@@ -66,11 +75,13 @@ The AppTracker <i class="far fa-check-circle"></i> is a web app designed to easi
                 </div>
                 <div class="row justify-content-center my-2 pt-3 pb-2">
                     <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:bugs' %}">View Bugs</a>
-                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Bug</a>
+                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report New Bug</a>
                 </div>
             </div>
         </article>
-    <!-- Features -->
+        <!-- End of Bugs -->
+
+        <!-- Features -->
         <article class="col-12 col-md-6 mx-auto mt-3">
             <div class="border border-secondary rounded-lg pl-2 content-area">
                 <div class="row justify-content-center">
@@ -129,9 +140,40 @@ The AppTracker <i class="far fa-check-circle"></i> is a web app designed to easi
                 </div>
                 <div class="row justify-content-center my-2 pt-3 pb-2">
                     <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:features' %}">View Features</a>
-                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Feature</a>
+                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Request New Feature</a>
                 </div>
             </div>
         </article>
     </div>
+    <!-- End of features -->
+
+    <!-- Charts -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6 mx-auto mt-3">
+                <div class="row justify-content-center">
+                    <h4>Bugs</h4>
+                </div>
+                <canvas id="bugsChart" class="chart">
+                </canvas>
+            </div>
+            <div class="col-12 col-md-6 mx-auto mt-3">
+                <div class="row justify-content-center">
+                    <h4>Features</h4>
+                </div>
+                <canvas id="featuresChart" class="chart">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <script>
+        let bugs = ['{{ total_bugs_pending }}', '{{ total_bugs_in_progress }}', '{{ total_bugs_completed }}']
+        let features = ['{{ total_features_pending }}', '{{ total_features_in_progress }}',
+            '{{ total_features_completed }}']
+    </script>
+    <!-- End of Charts -->
+{% endblock %}
+
+{% block chartjs %}
+    <script src="{% static 'script/charts.js' %}"></script>
 {% endblock %}

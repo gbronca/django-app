@@ -61,8 +61,8 @@ a.navbar-brand {
 }
 
 .badge-ticket-pending {
-	color: #212529;
-	background-color: #ffc107;
+	color: #ffffff;
+	background-color: #dc3545;
 }
 
 .badge-ticket-completed {
@@ -71,8 +71,8 @@ a.navbar-brand {
 }
 
 .badge-ticket-inprogress {
-	color: #ffffff;
-	background-color: #dc3545;
+	color: #212529;
+	background-color: #ffc107;
 }
 
 
