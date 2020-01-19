@@ -15,19 +15,35 @@
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
 	<script src="{% static 'script/stripe.js' %}"></script>
-
 {% endblock stripe %}
 
 {% block content %}
 
-<form action="" method="post" id="payment-form">
-  {% csrf_token %}
+<section class="col-12 col-md-6 mx-auto mt-5 pt-3">
+	<div class="row justify-content-center mb-3 pb-2">
+		<h3>Checkout</h3>
+	</div>
+	<div class="border border-secondary rounded-lg pl-2 content-area">
+		<div class="card-wrapper mt-2 mb-4 pb-1 pt-3"></div>
 
-	{{ payment_form|crispy }}
-    
-    <button id="submit_payment_btn" data-secret="{{ client_secret }}">
-      Submit Payment
-    </button>
-</form>
+		<form action="" method="post" id="payment-form">
+			{% csrf_token %}
+
+			{{ payment_form|crispy }}
+			
+			<div class="mt-4 mb-3 d-flex d-flex-row justify-content-center">
+				<button id="submit_payment_btn" class="btn btn-success" data-secret="{{ client_secret }}">
+					Submit Payment
+				</button>
+			</div>
+			<input type="hidden" name="expiry-date" id="expiry-date">
+		</form>
+	</div>
+</section>
 
 {% endblock content %}
+
+{% block chartjs %} 
+<script src="{% static 'script/card.js' %}"></script>
+<script src="{% static 'script/ccform.js' %}"></script>
+{% endblock chartjs %}

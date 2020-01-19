@@ -1,3 +1,13 @@
+$('#id_expiry_month, #id_expiry_year').on('change', function () {
+	// Set the value of a hidden input field for Card
+	$('#expiry-date').val($('#id_expiry_month').val() + '/' + $('#id_expiry_year').val());
+	// Trigger the "change" event manually
+	var evt = document.createEvent('HTMLEvents');
+	evt.initEvent('change', false, true);
+	document.getElementById('expiry-date').dispatchEvent(evt);
+});
+
+
 var card = new Card({
 	// a selector or DOM element for the form where users will
 	// be entering their information
@@ -8,12 +18,12 @@ var card = new Card({
 
 	formSelectors: {
 		numberInput: 'input#id_credit_card_number', // optional — default input[name="number"]
-		// expiryInput: 'input#expiry', // optional — default input[name="expiry"]
+		expiryInput: 'input#expiry-date',// optional — default input[name="expiry"]
 		cvcInput: 'input#id_cvv', // optional — default input[name="cvc"]
-		// nameInput: 'input#name' // optional - defaults input[name="name"]
+		nameInput: 'input#id_name' // optional - defaults input[name="name"]
 	},
 
-	width: 200, // optional — default 350px
+	width: 300, // optional — default 350px
 	formatting: true, // optional - default true
 
 	// Strings for translation - optional
@@ -26,7 +36,7 @@ var card = new Card({
 	placeholders: {
 		number: '•••• •••• •••• ••••',
 		// name: 'Full Name',
-		// expiry: '••/••',
+		expiry: '••/••••',
 		cvc: '•••'
 	},
 
@@ -35,5 +45,5 @@ var card = new Card({
 	},
 
 	// if true, will log helpful messages for setting up Card
-	debug: false // optional - default false
+	debug: true // optional - default false
 });
