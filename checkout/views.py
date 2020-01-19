@@ -7,6 +7,7 @@ from tickets.models import Ticket
 import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe_publishable = settings.STRIPE_PUBLISHABLE_KEY
 
 @login_required
 def checkout(request):
@@ -47,13 +48,13 @@ def checkout(request):
             messages.error(request, 'Something went wrong, please try again')
 
         context = {
-            'publishable': 'pk_test_7F4RnUeljkLYXFILdB7xoeyb00uU4KfSwO',
+            'publishable': stripe_publishable,
         }
 
     else:
         # payment_form = PaymentForm()
         context = {
-        'publishable': 'pk_test_7F4RnUeljkLYXFILdB7xoeyb00uU4KfSwO',
+        'publishable': stripe_publishable,
         'payment_form': payment_form,
         }
 
