@@ -1,1 +1,1 @@
-# django-app
+# Issue Tracker - Django app
