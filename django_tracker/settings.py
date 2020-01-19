@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import django_heroku
 
 # from dotenv import load_dotenv
 
@@ -155,3 +156,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 # Stripe system configuration variables
 STRIPE_PUBLISHABLE_KEY = os.environ.get('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')
+
+# Heroku database configuration
+django_heroku.settings(locals())
