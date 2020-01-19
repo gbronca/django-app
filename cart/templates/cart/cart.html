@@ -2,22 +2,25 @@
 
 {% block content %}
 
-<div class="row justify-content-center">
-    {% if ticket_count > 0 %}
-        <h2 class="mt-4 mb-2 pt-4 pb-2">Your cart ({{ ticket_count }} items)</h2>
+<div class="row justify-content-center mt-5 mb-3 py-2">
+    {% if tickets_count > 1 %}
+        <h2>Your cart ({{ tickets_count }} items)</h2>
+    {% elif tickets_count == 1 %}
+        <h2>Your cart ({{ tickets_count }} item)</h2>
     {% else %}
-        <h2 class="mt-4 mb-2 pt-4 pb-2">Your cart is empty</h2>
+        <h2>Your cart is empty</h2>
     {% endif %}
 </div>
 
-<!-- Stats tables -->
-    <div class="row">
+<!-- Cart -->
+    <div class="row mt-3">
         <article class="col-12 col-lg-10 mx-auto mt-3">
             <div class="border border-secondary rounded-lg pl-2 content-area">
                 <div class="px-3 mx-auto">
                     <div class="my-3 pt-3 pb-1">
                         <h4 class="font-weight-light">Your cart summary</h4>
                     </div>
+                    <!-- Cart table of contents -->
                     <table class="table table-hover table-sm">
                         <thead class="thead-light">
                             <tr>
@@ -57,7 +60,10 @@
                             {% endfor %}
                         </tbody>
                     </table>
-                    <div class="my-3 pt-3 pb-1 d-flex justify-content-end">
+                    <!-- End of cart table of contents -->
+                    
+                    <!-- Car total and checkout button -->
+                    <div class="mt-4 mb-3 pt-3 pb-1 d-flex justify-content-end">
                         <div class="mr-5">
                             <h5 class="font-weight-bolder mt-2">Cart Total: £ {{ total|floatformat:2 }}</h5>
                         </div>
@@ -70,12 +76,9 @@
                                 <button href="{% url 'checkout:checkout' %}" class="btn btn-success" role="button" disabled>Checkout <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
                             </div>
                         {% endif %}
-                    </div> 
+                    </div>
+                    <!-- End of cart total -->
                 </div>
-                <!-- <div class="row justify-content-center my-2 pt-3 pb-2">
-                    <a class="btn btn-outline-secondary mx-1" href="{% url 'tickets:bugs' %}">View Bugs</a>
-                    <a class="btn btn-outline-success mx-1" href="{% url 'tickets:new_ticket' %}">Report new Bug</a>
-                </div> -->
             </div>
         </article>
     </div>

@@ -23,7 +23,7 @@ var card = new Card({
 		nameInput: 'input#id_name' // optional - defaults input[name="name"]
 	},
 
-	width: 300, // optional — default 350px
+	width: 250, // optional — default 350px
 	formatting: true, // optional - default true
 
 	// Strings for translation - optional

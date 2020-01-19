@@ -1,11 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 
-
-    <button type="submit" class="save btn btn-default">Post Comment</button>
-
-
-
 {% block content %}
 
 <div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mt-3 mb-5 pt-5">
@@ -16,7 +11,7 @@
             {{ form|crispy }}
         </fieldset>
         <div class="form-group">
-            <button type="submit" class="btn btn-outline-primary">Save Comment</button>
+            <button type="submit" class="btn btn-outline-primary">Save</button>
         </div>
     </form>
 </div>

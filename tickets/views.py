@@ -136,7 +136,7 @@ def add_comment_to_ticket(request, pk):
             comment.save()
             return redirect('tickets:detail', pk=ticket.pk)
     else:
-        form = CommentForm()
+        form = CommentForm()  
     return render(request, 'tickets/comment_form.html', {'form': form, 'title': ticket.title, 'issue':ticket.issue})
 
 

@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div class="col-12 col-sm-10 col-md-8 col-lg-6 mx-auto mt-3">
+<div class="col-12 col-md-10 col-lg-6 mx-auto mt-5 pt-2">
     <form method="POST">
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Delete Request</legend>
-            <h3>You are about to delete the request {{ object.title }}. Do you wish to continue?</h3>
+        <fieldset class="form-group mt-2">
+            <legend class="border-bottom mb-5">Delete Request</legend>
+            <p>You are about to delete the request: <strong>{{ object.title }}</strong>. Do you wish to continue?</p>
         </fieldset>
-        <div class="form-group">
-            <a class="btn btn-outline-info" href="{% url 'tickets:detail' object.id %}">Cancel</a>
-            <button class="btn btn-danger" type="submit">Delete</button>
+        <div class="form-group mt-3">
+            <a class="btn btn-outline-info mr-2" href="{% url 'tickets:detail' object.id %}">Cancel</a>
+            <button class="btn btn-danger ml-2" type="submit">Delete</button>
         </div>
     </form>
 </div>

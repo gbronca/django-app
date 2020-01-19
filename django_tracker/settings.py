@@ -21,17 +21,17 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
-print(os.environ.get('EMAIL_USER'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'y1ys^jmz2i!!v**n@$0(*=hzdatr)=@!7qovcl=fd+wj$1oav7'
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1',
+                 'gb-tracker.herokuapp.com',]
 
 
 # Application definition
@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'tickets',
     'cart',
     'checkout',
-    'stripe',
 ]
 
 MIDDLEWARE = [

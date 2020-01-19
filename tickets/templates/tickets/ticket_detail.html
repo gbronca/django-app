@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-5 pt-1 mb-2">
+    <!-- Ticket Details -->
+    <div class="col-12 col-lg-8 mx-auto mt-5 pt-1 mb-2">
         <article class="border border-color-faded rounded-sm my-3 box-shadow bg-gray-light">
             <div class="px-3">
                 <div class="d-flex justify-content-between my-1">
@@ -63,8 +64,9 @@
             </div>
         </article>
     </div>
-
-    <div class="col-12 col-sm-10 col-lg-8 mx-auto mt-3 mb-5 pb-5">
+    <!-- End of Ticket Details -->
+    <!-- Comments -->
+    <div class="col-12 col-lg-8 mx-auto mt-3 mb-5 pb-5">
         {% for comment in object.comments.all %}
             <article class="border border-color-faded rounded-sm my-3 box-shadow bg-gray-light">
                 <div class="px-3 py-2">
@@ -89,5 +91,5 @@
             <p>No comments posted.</p>
         {% endfor %}
     </div>
-
+    <!-- End of Comments -->
 {% endblock %}
