@@ -81,10 +81,10 @@ class TicketDetailView(DetailView):
     model = Ticket
 
     def get_object(self, queryset=None):
-        obj = super().get_object()
-        obj.views += 1
-        obj.save()
-        return obj
+        ticket = super().get_object()
+        ticket.views += 1
+        ticket.save()
+        return ticket
     
 
 class TicketCreateView(LoginRequiredMixin ,CreateView):

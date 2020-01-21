@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import UserRegistrationForm
+from .forms import UserRegistrationForm, UserUpdateForm
 from tickets.models import Ticket
 
 
@@ -19,7 +19,30 @@ def signup(request):
 
 @login_required
 def user_profile(request):
-    return render(request, 'accounts/profile.html', {'title': 'My Profile'})
+
+    if request.method == 'POST':
+        profile_form = UserUpdateForm(request.POST, instance=request.user)
+
+        if profile_form.is_valid():
+            # prevent a user from changing the joined date by disabling 
+            # the read only tag from html
+            # the form only saves username, email, first name and last name.
+            form = profile_form.save(commit=False)
+            form.save(update_fields=['username', 'email', 'first_name', 'last_name'])
+
+            messages.success(request, 'Your account has been updated')
+            return redirect('accounts:profile')
+        else:
+            messages.error(request, 'Something went wrong, please try again')
+            return redirect('accounts:profile')
+    else:
+        profile_form = UserUpdateForm(instance=request.user)
+
+    context = {
+        'profile_form': profile_form,
+        'title': f'{request.user.username} Profile',
+    }
+    return render(request, 'accounts/profile.html', context)
 
 
 def index(request):
