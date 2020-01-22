@@ -24,6 +24,7 @@ class Ticket(models.Model):
     upvotes = models.PositiveIntegerField(default=0)
     views = models.PositiveIntegerField(default=0)
 
+        
     def __str__(self):
         return self.title
 
@@ -40,8 +41,13 @@ class Comments(models.Model):
     date_created = models.DateTimeField(default=timezone.now)
     date_updated = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'Comments'
+
+
     def __str__(self):
         return f'{self.ticket}: {self.username}'
+
 
     def get_absolute_url(self):
         return reverse("ticket:detail")
@@ -51,5 +57,10 @@ class Upvoted(models.Model):
     ticket = models.ForeignKey(Ticket, default=None, on_delete=models.CASCADE)
     user = models.ForeignKey(User, default=None, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return f'{self.user}: {self.ticket}'
+
+
+    class Meta:
+        verbose_name_plural = 'Upvoted'

@@ -161,7 +161,7 @@ def ticket_upvote(request, pk=None):
             upvote.ticket = ticket
             ticket_voted.save()
             upvote.save()
-            messages.success(request, 'Your vote has been recorded. Thanks for voting on this ticket.')
+            messages.success(request, 'Your vote has been recorded. Thanks for supporting this ticket.')
         else:
             messages.warning(request, 'You have already voted on this item.')
 

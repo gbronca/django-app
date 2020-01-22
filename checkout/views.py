@@ -34,7 +34,7 @@ def checkout(request):
                 message.error(request, 'Your card was declined')
 
             if payment.paid:
-                messages.success(request, 'Paid successfuly completed')
+                messages.success(request, 'Your payment was successful. Thanks for supporting us!')
                 for id, quantity in cart.items():
                     ticket = get_object_or_404(Ticket, pk=id)
                     ticket.upvotes += quantity

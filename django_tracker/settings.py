@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 import django_heroku
+import distutils.util
 
 # from dotenv import load_dotenv
 
@@ -29,7 +30,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG')
+DEBUG = bool(distutils.util.strtobool(os.environ.get('DEBUG','False')))
 
 ALLOWED_HOSTS = ['127.0.0.1',
                  'gb-tracker.herokuapp.com',]
