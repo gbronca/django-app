@@ -7,6 +7,8 @@ app_name = 'tickets'
 urlpatterns = [
     path('bugs/', views.BugListView.as_view(template_name='tickets/tickets.html'), name='bugs'),
     path('features/', views.FeaturesListView.as_view(template_name='tickets/tickets.html'), name='features'),
+    # path('bugs/<status>', views.BugStatusListView.as_view(template_name='tickets/tickets.html'), name='bugs'), # check
+    # path('features/<status>', views.FeaturesStatusListView.as_view(template_name='tickets/tickets.html'), name='features'), # check
     path('detail/<int:pk>/', views.TicketDetailView.as_view(), name='detail'),
     path('new/', views.TicketCreateView.as_view(), name='new_ticket'),
     path('detail/<int:pk>/update', views.TicketUpdateView.as_view(), name='update'),

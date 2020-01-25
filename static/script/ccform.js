@@ -1,3 +1,5 @@
+// Code from https://github.com/jessepollak/card
+
 $('#id_expiry_month, #id_expiry_year').on('change', function () {
 	// Set the value of a hidden input field for Card
 	$('#expiry-date').val($('#id_expiry_month').val() + '/' + $('#id_expiry_year').val());
@@ -6,7 +8,6 @@ $('#id_expiry_month, #id_expiry_year').on('change', function () {
 	evt.initEvent('change', false, true);
 	document.getElementById('expiry-date').dispatchEvent(evt);
 });
-
 
 var card = new Card({
 	// a selector or DOM element for the form where users will

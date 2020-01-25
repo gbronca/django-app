@@ -22,7 +22,7 @@ class BugListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Ticket.objects.filter(issue='Bug').order_by('-date_posted')
-
+        
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
