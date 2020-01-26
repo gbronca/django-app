@@ -21,7 +21,7 @@ from accounts.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('about/',TemplateView.as_view(template_name='about.html'), name='about'),
+    path('about/',TemplateView.as_view(template_name='about.html', extra_context={'title': 'About'}), name='about'),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('tickets/', include('tickets.urls', namespace='tickets')),
     path('cart/', include('cart.urls', namespace='cart')),

@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 
 def view_cart(request):
     """A view that returns the cart contents page"""
-    return render(request, 'cart/cart.html')
+    return render(request, 'cart/cart.html', {'title': 'Cart'})
     
 
 def add_to_cart(request, id):

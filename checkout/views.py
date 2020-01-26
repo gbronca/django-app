@@ -15,6 +15,18 @@ def checkout(request):
     price = 10
     payment_form = PaymentForm()
 
+    # Checks if there are elements added to cart prior to serve
+    # the checkout page. If the cart is empty, it redirects back
+    # to cart. If the cart is not empty, it will proceed with
+    # the payment process.
+    cart = request.session.get('cart', {})
+    total = 0
+    for id, quantity in cart.items():
+        total += quantity * price
+    if total == 0:
+        return redirect(reverse('cart:cart'))
+
+
     if request.method == 'POST':
         payment_form = PaymentForm(request.POST)
 

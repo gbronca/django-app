@@ -8,7 +8,7 @@ The App-Tracker app can be viewed [here](http://gb-tracker.herokuapp.com/)
 
 ## UX
 
-The idea behind the project is that clients from other projects would have a plataform where they could report bugs on their sites and request new features.
+The idea behind the project is that clients from other projects would have a platform where they could report bugs on their sites and request new features.
 
 The app incorporates ann user authentication system. Registered user can:
 
@@ -22,9 +22,9 @@ The app incorporates ann user authentication system. Registered user can:
 * Update their personal information on the profile page
 * Reset their password
 
-The site also provides a table with statistics on bugs and features and a pie chart to to visualise the progress on fixing bugs and implementing features.
+The site also provides a table with statistics on bugs and features and a pie chart to visualise the progress on fixing bugs and implementing features.
 
-To upvote a feature, the user first need to add the feature into the cart and make a payment via [Stripe](https://www.stripe.com/).
+To upvote a feature, the user must first add the feature into the cart and make a payment via [Stripe](https://www.stripe.com/).
 
 ### User Stories
 
@@ -38,7 +38,7 @@ To upvote a feature, the user first need to add the feature into the cart and ma
 
 5. A user should be able to see the status of a bug or feature;
 
-    * The possible status are:
+    * The possible states are:
 
         * Pending;
         * In Progress;
@@ -56,7 +56,7 @@ To upvote a feature, the user first need to add the feature into the cart and ma
     * Can comment on a bug;
     * Can comment on a feature;
     * Can check their cart;
-    * Can add a features to their cart;
+    * Can add features to their cart;
     * Can remove features from their cart;
     * Can pay for features in their cart;
     * Can edit their own profile;
@@ -67,21 +67,21 @@ To upvote a feature, the user first need to add the feature into the cart and ma
 
 * The app was designed in Django 2.2.9 and Python 3.7.6 using MySQL Database locally. When deployed to Heroku the database was migrated to PostgreSQL.
 
-* Django integrated OAuth to manage user accounts, sign ins, sign ups, sign outs and password resets.
+* Django integrated OAuth to manage user accounts, sign-ins, sign-ups, sign-outs and password resets.
 
 * Complete CRUD implementation of the ticket app. Registered users can create, edit, delete and update their own requests.
 
 * Upvote of bugs and features. Upvote of features is dependant on completion of payment via Stripe.
 
-* The individual apps are scalable and can easily be integrated in other projects.
+* The individual apps are scalable and can easily be integrated into other projects.
 
-* The user is able to reset password, as long as the correct email is registered in the app. An email is sent with a link allowing the user to reset the password.
+* The user is able to reset the password, as long as the correct email is registered in the app. An email is sent with a link allowing the user to reset the password.
 
 * Editing of bugs and features is restricted to the user that created it.
 
 * The app makes use of the Stripe API so users can support the development of new features.
 
-* The charts in the home page are created using Chart.js.
+* The charts on the home page are created using Chart.js.
 
 #### Features for future development
 
@@ -93,13 +93,11 @@ To upvote a feature, the user first need to add the feature into the cart and ma
 
 ### Wireframes
 
+![Home Page](docs/wireframes/homepage.png)
 
+![Lists](docs/wireframes/Lists.png)
 
-
-## Database Schema
-
-
-
+![Basic Template](docs/wireframes/basic.png)
 
 ## Technologies
 
@@ -133,7 +131,7 @@ All pages have been tested extensively during development by myself. Once deploy
 
 It was tested different browsers, including Firefox, Safari, Chrome and Brave for macOS and Windows 10.
 
-The site was tested for responsiveness using devtools and on the iPhone.
+The site was tested for responsiveness using Firefox and Chrome dev tools and on the iPhone.
 
 * HTML validated by [The W3C Markup Validation Service](https://validator.w3.org/)
 
@@ -169,7 +167,7 @@ The project is hosted in Heroku. Please follow the steps below to deploy the app
 
 6. Create a new app Heroku app. If using the command line, in terminal type `heroku create appname`
 
-7. Add the url of your new Heroku app to the `ALLOWED_HOSTS` variable in `settings.py`
+7. Add the URL of your new Heroku app to the `ALLOWED_HOSTS` variable in `settings.py`
 
 8. Create a `Procfile` file
 
@@ -199,7 +197,7 @@ The project is hosted in Heroku. Please follow the steps below to deploy the app
 
 15. Make sure to update `requirements.txt` file.
 
-16. in the command line type `heroku run python manage.py migrate` to migrate the database and create the tables.
+16. in the command line type: `heroku run python manage.py migrate` to migrate the database and create the tables.
 
 17. To create a superuser via Heroku bash commands type in the command line `heroku run bash`, then `python manage.py createsuperuser`. after entering the superuser details, type exit to exit the bash terminal.
 
@@ -207,7 +205,7 @@ The project is hosted in Heroku. Please follow the steps below to deploy the app
 
 * Clone the repository
 
-* Create a virtual environment and install the the project dependencies `pip install -r requirement.txt`.
+* Create a virtual environment and install the project dependencies `pip install -r requirement.txt`.
 
 * setup the environment variables
 
@@ -223,4 +221,10 @@ STRIPE_PUBLISHABLE_KEY
 STRIPE_SECRET_KEY
 ```
 
-* On terminal type `python3 manage.py runserver` to run the app.
+* on terminal type:
+
+  * `python3 manage.py makemigrations` to make migrations
+
+  * `python3 manage.py migrate` to migrate
+
+  * `python3 manage.py runserver` to run the app.
