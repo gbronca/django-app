@@ -125,6 +125,10 @@ To upvote a feature, the user must first add the feature into the cart and make 
 
 * [Travis-CI](https://travis-ci.com)
 
+Card.js is used during checkout to format and display the card information in the form.
+
+Chart.js is the Javascript library responsible for creating the charts on the homepage.
+
 ## Tests
 
 All pages have been tested extensively during development by myself. Once deployed, the app was tested by a small number of people, mainly family members and work colleagues that have reported any issues they may have found.
@@ -209,17 +213,17 @@ The project is hosted in Heroku. Please follow the steps below to deploy the app
 
 * setup the environment variables
 
-```python
-DEBUG
-SECRET_KEY
-EMAIL_HOST
-EMAIL_PORT
-EMAIL_USE_TLS
-EMAIL_USER
-EMAIL_PASSWORD
-STRIPE_PUBLISHABLE_KEY
-STRIPE_SECRET_KEY
-```
+    ```python
+    DEBUG
+    SECRET_KEY
+    EMAIL_HOST
+    EMAIL_PORT
+    EMAIL_USE_TLS
+    EMAIL_USER
+    EMAIL_PASSWORD
+    STRIPE_PUBLISHABLE_KEY
+    STRIPE_SECRET_KEY
+    ```
 
 * on terminal type:
 
