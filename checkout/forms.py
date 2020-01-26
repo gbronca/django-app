@@ -9,7 +9,8 @@ class PaymentForm(forms.Form):
     YEAR_CHOICES = [(i, i) for i in range(current_year, current_year + 10)]
     
     name = forms.CharField(label='Name on Credit Card',
-                                       max_length=200)
+                                       max_length=200,
+                                       required=False)
     credit_card_number = forms.CharField(label='Credit Card number',
                                          required=False,
                                          max_length=19,
