@@ -111,7 +111,11 @@ To upvote a feature, the user must first add the feature into the cart and make 
 
 * [Card.js](https://github.com/jessepollak/card)
 
+    Card.js is used during checkout to format and display the card information in the form. It also validates the card number typed in the input box, not allowing to progress with payment unless the correct number is entered.
+
 * [Chart.js](https://www.chartjs.org/)
+
+    Chart.js is the Javascript library responsible for creating the charts on the homepage.
 
 * [Stripe](https://stripe.com/gb)
 
@@ -124,10 +128,6 @@ To upvote a feature, the user must first add the feature into the cart and make 
 * [Heroku](https://www.heroku.com/)
 
 * [Travis-CI](https://travis-ci.com)
-
-Card.js is used during checkout to format and display the card information in the form.
-
-Chart.js is the Javascript library responsible for creating the charts on the homepage.
 
 ## Tests
 

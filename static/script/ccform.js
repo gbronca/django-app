@@ -46,5 +46,5 @@ var card = new Card({
 	},
 
 	// if true, will log helpful messages for setting up Card
-	debug: true // optional - default false
+	debug: false // optional - default false
 });
