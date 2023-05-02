@@ -10,7 +10,7 @@ psycopg2==2.8.4
 python-dotenv==0.10.3
 pytz==2019.3
 requests==2.25.0
-sqlparse==0.3.0
+sqlparse==0.4.4
 stripe==2.42.0
 urllib3==1.26.5
 whitenoise==5.0.1
